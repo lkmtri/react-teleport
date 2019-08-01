@@ -1,8 +1,9 @@
 {
-  "name": "react-teleport",
+  "name": "@suinegmai/react-teleport",
   "version": "0.0.1",
   "description": "Easy react portal",
-  "main": "index.js",
+  "main": "./dist/react-teleport.js",
+  "module": "./dist/react-teleport.esm.js",
   "author": "lkmtri",
   "license": "MIT",
   "private": false,
