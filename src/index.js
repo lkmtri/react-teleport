@@ -1,4 +1,4 @@
-import Portal from './Portal';
-import PortalDest from './PortalDest';
+import Portal from './Portal'
+import PortalDest from './PortalDest'
 
-export { Portal, PortalDest };
+export { Portal, PortalDest }

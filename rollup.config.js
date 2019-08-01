@@ -14,8 +14,7 @@ module.exports = {
   ],
   plugins: [
     babel({
-      presets: ['@babel/env', '@babel/preset-react'],
-      exclude: 'node_modules/**'
-    })
-  ]
-};
+      babelrc: true,
+    }),
+  ],
+}
