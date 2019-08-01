@@ -1,6 +1,6 @@
 {
   "name": "@suinegmai/react-teleport",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Easy react portal",
   "main": "./dist/react-teleport.js",
   "module": "./dist/react-teleport.esm.js",
@@ -11,15 +11,15 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "prop-types": "^15.7.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "rollup-plugin-babel": "^4.3.3"
   },
   "peerDependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "prop-types": "^15.7.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "dependencies": {
     "@suinegmai/js-events": "^1.0.0"
