@@ -1,4 +1,5 @@
-# Simple react portal
+# react-teleport
+### Simple React portal
 
 [![npm version](https://badge.fury.io/js/%40suinegmai%2Freact-teleport.svg)](https://badge.fury.io/js/%40suinegmai%2Freact-teleport)
 
