@@ -44,12 +44,12 @@ const createPortal = () => {
       : null
   }
 
-  const Target = ({ Container = 'div' }) => {
+  const Target = ({ Container = 'div', ...props }) => {
     const containerRef = useRef()
 
     useEffect(() => registerTarget(containerRef.current), [])
 
-    return <Container ref={containerRef} />
+    return <Container ref={containerRef} {...props} />
   }
 
   return {

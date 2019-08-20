@@ -1,6 +1,6 @@
 {
   "name": "@suinegmai/react-teleport",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Easy react portal",
   "main": "./dist/react-teleport.js",
   "module": "./dist/react-teleport.esm.js",

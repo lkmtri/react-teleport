@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import portalRegistry from './portalRegistry'
 
-const PortalDest = ({ channel, Container = 'div' }) => {
+const PortalDest = ({ channel, Container = 'div', ...props }) => {
   const containerRef = useRef()
 
   useEffect(
@@ -10,7 +10,7 @@ const PortalDest = ({ channel, Container = 'div' }) => {
     [channel],
   )
 
-  return <Container ref={containerRef} />
+  return <Container ref={containerRef} {...props} />
 }
 
 PortalDest.propTypes = {

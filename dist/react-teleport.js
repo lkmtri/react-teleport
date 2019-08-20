@@ -10,6 +10,60 @@ var ReactDOM = _interopDefault(require('react-dom'));
 var PropTypes = _interopDefault(require('prop-types'));
 var EventEmitter = _interopDefault(require('@suinegmai/js-events'));
 
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
 }
@@ -95,14 +149,16 @@ Portal.propTypes = {
 var PortalDest = function PortalDest(_ref) {
   var channel = _ref.channel,
       _ref$Container = _ref.Container,
-      Container = _ref$Container === void 0 ? 'div' : _ref$Container;
+      Container = _ref$Container === void 0 ? 'div' : _ref$Container,
+      props = _objectWithoutProperties(_ref, ["channel", "Container"]);
+
   var containerRef = React.useRef();
   React.useEffect(function () {
     return portalRegistry.registerDestElement(channel, containerRef.current);
   }, [channel]);
-  return React__default.createElement(Container, {
+  return React__default.createElement(Container, _extends({
     ref: containerRef
-  });
+  }, props));
 };
 
 PortalDest.propTypes = {
@@ -161,14 +217,16 @@ var createPortal = function createPortal() {
 
   var Target = function Target(_ref2) {
     var _ref2$Container = _ref2.Container,
-        Container = _ref2$Container === void 0 ? 'div' : _ref2$Container;
+        Container = _ref2$Container === void 0 ? 'div' : _ref2$Container,
+        props = _objectWithoutProperties(_ref2, ["Container"]);
+
     var containerRef = React.useRef();
     React.useEffect(function () {
       return registerTarget(containerRef.current);
     }, []);
-    return React__default.createElement(Container, {
+    return React__default.createElement(Container, _extends({
       ref: containerRef
-    });
+    }, props));
   };
 
   return {
