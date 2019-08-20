@@ -65,7 +65,7 @@ function App() {
               <div>
                 tree
                 <Portal.Source>
-                  <p>This will be rendered to PortalDest node</p>
+                  <p>This will be rendered to Portal.Target node</p>
                 </Portal.Source>
               </div>
               <Portal.Source>
