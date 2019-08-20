@@ -110,5 +110,73 @@ PortalDest.propTypes = {
   Container: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 };
 
+var createPortalRegistry = function createPortalRegistry() {
+  var target = null;
+  var sources = [];
+
+  var registerTarget = function registerTarget(element) {
+    target = element;
+    sources.forEach(function (source) {
+      typeof source === 'function' && source(target);
+    });
+    return function () {
+      registerTarget(null);
+    };
+  };
+
+  var registerSource = function registerSource(callback) {
+    target && callback(target);
+    sources.push(callback);
+    return function () {
+      sources = sources.filter(function (source) {
+        return source !== callback;
+      });
+    };
+  };
+
+  return {
+    registerTarget: registerTarget,
+    registerSource: registerSource
+  };
+};
+
+var createPortal = function createPortal() {
+  var _createPortalRegistry = createPortalRegistry(),
+      registerTarget = _createPortalRegistry.registerTarget,
+      registerSource = _createPortalRegistry.registerSource;
+
+  var Source = function Source(_ref) {
+    var children = _ref.children;
+
+    var _useState = React.useState(),
+        _useState2 = _slicedToArray(_useState, 2),
+        containerElement = _useState2[0],
+        setContainerElement = _useState2[1];
+
+    React.useEffect(function () {
+      return registerSource(setContainerElement);
+    }, []);
+    return containerElement ? ReactDOM.createPortal(children, containerElement) : null;
+  };
+
+  var Target = function Target(_ref2) {
+    var _ref2$Container = _ref2.Container,
+        Container = _ref2$Container === void 0 ? 'div' : _ref2$Container;
+    var containerRef = React.useRef();
+    React.useEffect(function () {
+      return registerTarget(containerRef.current);
+    }, []);
+    return React__default.createElement(Container, {
+      ref: containerRef
+    });
+  };
+
+  return {
+    Target: Target,
+    Source: Source
+  };
+};
+
 exports.Portal = Portal;
 exports.PortalDest = PortalDest;
+exports.createPortal = createPortal;
