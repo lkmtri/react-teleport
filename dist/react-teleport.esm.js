@@ -173,7 +173,13 @@ var createPortalRegistry = function createPortalRegistry() {
     };
   };
 
-  var registerSource = function registerSource(callback) {
+  var registerSource = function registerSource(callback, only) {
+    if (only && sources.length) {
+      sources.forEach(function (source) {
+        typeof source === 'function' && source(null);
+      });
+    }
+
     target && callback(target);
     sources.push(callback);
     return function () {
@@ -195,7 +201,8 @@ var createPortal = function createPortal() {
       registerSource = _createPortalRegistry.registerSource;
 
   var Source = function Source(_ref) {
-    var children = _ref.children;
+    var children = _ref.children,
+        only = _ref.only;
 
     var _useState = useState(),
         _useState2 = _slicedToArray(_useState, 2),
@@ -203,8 +210,8 @@ var createPortal = function createPortal() {
         setContainerElement = _useState2[1];
 
     useEffect(function () {
-      return registerSource(setContainerElement);
-    }, []);
+      return registerSource(setContainerElement, only);
+    }, [only]);
     return containerElement ? ReactDOM.createPortal(children, containerElement) : null;
   };
 
