@@ -13,12 +13,7 @@ var createPortalRegistry = function () {
             registerTarget(null);
         };
     };
-    var registerSource = function (callback, only) {
-        if (only && sources.length) {
-            sources.forEach(function (source) {
-                source(null);
-            });
-        }
+    var registerSource = function (callback) {
         target && callback(target);
         sources.push(callback);
         return function () {
@@ -33,9 +28,9 @@ var createPortalRegistry = function () {
 var createPortal = function () {
     var _a = createPortalRegistry(), registerTarget = _a.registerTarget, registerSource = _a.registerSource;
     var Source = function (_a) {
-        var children = _a.children, only = _a.only;
+        var children = _a.children;
         var _b = useState(null), containerElement = _b[0], setContainerElement = _b[1];
-        useEffect(function () { return registerSource(setContainerElement, only); }, [only]);
+        useEffect(function () { return registerSource(setContainerElement); }, []);
         return containerElement
             ? ReactDOM.createPortal(children, containerElement)
             : null;
