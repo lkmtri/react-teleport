@@ -1,14 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const createPortalRegistry = () => {
-  let target = null
-  let sources = []
+type TargetType = HTMLElement | null
+type SourceCallbackFn = (el: TargetType) => void
 
-  const registerTarget = element => {
+const createPortalRegistry = () => {
+  let target: TargetType = null
+  let sources: SourceCallbackFn[] = []
+
+  const registerTarget = (element: HTMLElement | null) => {
     target = element
     sources.forEach(source => {
-      typeof source === 'function' && source(target)
+      source(target)
     })
 
     return () => {
@@ -16,10 +19,10 @@ const createPortalRegistry = () => {
     }
   }
 
-  const registerSource = (callback, only) => {
+  const registerSource = (callback: SourceCallbackFn, only?: boolean) => {
     if (only && sources.length) {
-      sources.forEach((source) => {
-        typeof source === 'function' && source(null)
+      sources.forEach(source => {
+        source(null)
       })
     }
     target && callback(target)
@@ -36,11 +39,20 @@ const createPortalRegistry = () => {
   }
 }
 
+interface TargetProps {
+  Container?: React.ElementType
+}
+
+interface SourceProps {
+  children: React.ReactNode
+  only?: boolean
+}
+
 const createPortal = () => {
   const { registerTarget, registerSource } = createPortalRegistry()
 
-  const Source = ({ children, only }) => {
-    const [containerElement, setContainerElement] = useState()
+  const Source = ({ children, only }: SourceProps) => {
+    const [containerElement, setContainerElement] = useState<TargetType>(null)
 
     useEffect(() => registerSource(setContainerElement, only), [only])
 
@@ -49,12 +61,12 @@ const createPortal = () => {
       : null
   }
 
-  const Target = ({ Container = 'div', ...props }) => {
-    const containerRef = useRef()
+  const Target = ({ Container = 'div' }: TargetProps) => {
+    const containerRef = useRef<HTMLElement>(null)
 
     useEffect(() => registerTarget(containerRef.current), [])
 
-    return <Container ref={containerRef} {...props} />
+    return <Container ref={containerRef} />
   }
 
   return {

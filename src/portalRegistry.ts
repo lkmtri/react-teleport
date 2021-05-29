@@ -1,9 +1,11 @@
 import EventEmitter from '@suinegmai/js-events'
 
-const dests = new Map()
-const portalEvents = EventEmitter()
+type DestElementType = HTMLElement | null
 
-const registerDestElement = (channel, element) => {
+const dests = new Map<string, DestElementType>()
+const portalEvents = EventEmitter<Record<string, DestElementType>>()
+
+const registerDestElement = (channel: string, element: DestElementType) => {
   dests.set(channel, element)
   portalEvents.emit(channel, element)
   return () => {
@@ -11,7 +13,7 @@ const registerDestElement = (channel, element) => {
   }
 }
 
-const subscribe = (channel, callback) => {
+const subscribe = (channel: string, callback: (el: DestElementType) => void) => {
   const destElement = dests.get(channel)
   destElement && callback(destElement)
   portalEvents.on(channel, callback)

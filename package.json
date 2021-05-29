@@ -1,33 +1,45 @@
 {
   "name": "@suinegmai/react-teleport",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Easy react portal",
-  "main": "./dist/react-teleport.js",
-  "module": "./dist/react-teleport.esm.js",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "author": "lkmtri",
   "license": "MIT",
   "private": false,
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "@testing-library/react": "^8.0.7",
-    "babel-eslint": "8",
-    "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react-hooks": "^1.6.1",
-    "prettier-eslint": "^9.0.0",
-    "prop-types": "^15.7.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "rollup-plugin-babel": "^4.3.3"
-  },
   "peerDependencies": {
     "prop-types": "^15.7.0",
-    "react": "^16.8.0",
+    "react": "^17.0.0",
     "react-dom": "^16.8.0"
   },
+  "scripts": {
+    "prebuild": "shx rm -rf dist",
+    "build": "concurrently 'yarn:build-*'",
+    "build-base": "rollup -c"
+  },
+  "devDependencies": {
+    "@babel/core": "7.14.3",
+    "@babel/plugin-transform-runtime": "7.14.3",
+    "@babel/preset-env": "7.14.4",
+    "@babel/preset-react": "7.13.13",
+    "@babel/preset-typescript": "7.13.0",
+    "@optimize-lodash/rollup-plugin": "1.0.0",
+    "@rollup/plugin-babel": "5.3.0",
+    "@rollup/plugin-node-resolve": "13.0.0",
+    "@rollup/plugin-typescript": "8.2.1",
+    "@types/react": "17.0.8",
+    "@types/react-dom": "17.0.5",
+    "concurrently": "6.2.0",
+    "esbuild": "0.12.5",
+    "rollup": "2.50.4",
+    "rollup-plugin-esbuild": "4.2.3",
+    "rollup-plugin-size-snapshot": "0.12.0",
+    "shx": "0.3.3",
+    "tslib": "2.2.0",
+    "typescript": "4.3.2"
+  },
   "dependencies": {
-    "@suinegmai/js-events": "^1.0.0"
+    "@suinegmai/js-events": "1.0.1"
   }
 }

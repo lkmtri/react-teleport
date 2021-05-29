@@ -4,8 +4,8 @@
     "node": true
   },
   "extends": ["standard"],
-  "plugins": ["react-hooks"],
-  "parser": "babel-eslint",
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"

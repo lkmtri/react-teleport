@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 import portalRegistry from './portalRegistry'
 
-const Portal = ({ channel, children }) => {
-  const [containerElement, setContainerElement] = useState()
+interface PortalProps {
+  channel: string
+  children: React.ReactNode
+}
+
+const Portal = ({ channel, children }: PortalProps) => {
+  const [containerElement, setContainerElement] = useState<HTMLElement | null>(null)
 
   useEffect(() => portalRegistry.subscribe(channel, setContainerElement), [
     channel,
@@ -13,10 +17,6 @@ const Portal = ({ channel, children }) => {
   return containerElement
     ? ReactDOM.createPortal(children, containerElement)
     : null
-}
-
-Portal.propTypes = {
-  channel: PropTypes.string.isRequired,
 }
 
 export default Portal
