@@ -18,45 +18,6 @@ yarn @suinegmai/react-teleport
 
 ## Usage
 
-### Using PortalDest and Portal component
-
-```javascript
-import { PortalDest, Portal } from '@suinegmai/react-teleport'
-
-function App() {
-  return (
-    <div>
-      <PortalDest channel='channelId' />
-      <div>
-        Somewhere
-        <div>
-          deep
-          <div>
-            in
-            <div>
-              the
-              <div>
-                tree
-                <Portal channel='channelId'>
-                  <p>This will be rendered to PortalDest node</p>
-                </Portal>
-              </div>
-              <Portal channel='channelId'>
-                <p>
-                  Multiple sources can be rendered to a single portal channel
-                </p>
-              </Portal>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-```
-
-### Using createPortal
-
 ```javascript
 import { createPortal } from '@suinegmai/react-teleport'
 
@@ -91,7 +52,3 @@ function App() {
   )
 }
 ```
-
-## Caveats
-
-`PortalDest` and `Portal` component aren't SSR-compatible.

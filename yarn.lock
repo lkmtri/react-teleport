@@ -1037,11 +1037,6 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@suinegmai/js-events@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@suinegmai/js-events/-/js-events-1.0.5.tgz#8ca1f82085701481fd6c0ae27aefec535cdf0a17"
-  integrity sha512-8neNR0DirGioM9z6o7x5MO18Q2NWT4UKGiglngw4q2zEHbZQ79bxHVkfLblT4aEUL0FkiU+U5WunYsj/JGw+fA==
-
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"

@@ -1,47 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import EventEmitter from '@suinegmai/js-events';
-import { __rest, __assign } from 'tslib';
-
-var dests = new Map();
-var portalEvents = EventEmitter();
-var registerDestElement = function (channel, element) {
-    dests.set(channel, element);
-    portalEvents.emit(channel, element);
-    return function () {
-        registerDestElement(channel, null);
-    };
-};
-var subscribe = function (channel, callback) {
-    var destElement = dests.get(channel);
-    destElement && callback(destElement);
-    portalEvents.on(channel, callback);
-    return function () {
-        portalEvents.off(channel, callback);
-    };
-};
-var portalRegistry = {
-    registerDestElement: registerDestElement,
-    subscribe: subscribe
-};
-
-var Portal = function (_a) {
-    var channel = _a.channel, children = _a.children;
-    var _b = useState(null), containerElement = _b[0], setContainerElement = _b[1];
-    useEffect(function () { return portalRegistry.subscribe(channel, setContainerElement); }, [
-        channel,
-    ]);
-    return containerElement
-        ? ReactDOM.createPortal(children, containerElement)
-        : null;
-};
-
-var PortalDest = function (_a) {
-    var channel = _a.channel, _b = _a.Container, Container = _b === void 0 ? 'div' : _b, props = __rest(_a, ["channel", "Container"]);
-    var containerRef = useRef(null);
-    useEffect(function () { return portalRegistry.registerDestElement(channel, containerRef.current); }, [channel]);
-    return React.createElement(Container, __assign({ ref: containerRef }, props));
-};
 
 var createPortalRegistry = function () {
     var target = null;
@@ -94,4 +52,4 @@ var createPortal = function () {
     };
 };
 
-export { Portal, PortalDest, createPortal };
+export { createPortal };
