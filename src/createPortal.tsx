@@ -19,7 +19,13 @@ const createPortalRegistry = () => {
     }
   }
 
-  const registerSource = (callback: SourceCallbackFn) => {
+  const registerSource = (callback: SourceCallbackFn, only?: boolean) => {
+    if (only && sources.length) {
+      sources.forEach(source => {
+        source(null)
+      })
+    }
+
     target && callback(target)
     sources.push(callback)
 
@@ -40,15 +46,16 @@ interface TargetProps {
 
 interface SourceProps {
   children: React.ReactNode
+  only?: boolean
 }
 
 const createPortal = () => {
   const { registerTarget, registerSource } = createPortalRegistry()
 
-  const Source = ({ children }: SourceProps) => {
+  const Source = ({ children, only }: SourceProps) => {
     const [containerElement, setContainerElement] = useState<TargetType>(null)
 
-    useEffect(() => registerSource(setContainerElement), [])
+    useEffect(() => registerSource(setContainerElement, only), [])
 
     return containerElement
       ? ReactDOM.createPortal(children, containerElement)
